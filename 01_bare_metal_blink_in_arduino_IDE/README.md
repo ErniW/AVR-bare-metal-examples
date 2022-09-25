@@ -1,4 +1,5 @@
 ## Blinking an LED
+Before I move on, I will explain the basics using Arduino IDE.
 ### We need 3 things:
 - Find the port of Arduino LED pin 13.
 - Set that pin to output.
