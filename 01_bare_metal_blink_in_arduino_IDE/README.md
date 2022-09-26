@@ -37,7 +37,6 @@ We could set it using **bit shift operator** `1 << n` which will **move all bits
 ### Finally, to set the bit 5 you should choose one of the following:
 
      DDRB |= (1 << PB5);
-     DDRB |= PB5;
      DDRB |= _BV(PB5); //set the Bit Value, available through avr library
      
 Using pre-defined macros such as DDRB and PB5 is preferred, otherwise you should create your own or you’ll end up with code like this:
