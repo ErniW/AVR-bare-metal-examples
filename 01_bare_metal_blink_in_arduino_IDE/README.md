@@ -7,8 +7,12 @@ Before I move on, I will explain the basics using Arduino IDE.
 
 ### Reading the documentation:
 - Understanding how to read things is more important than remembering. It’s a basic overview so I will cover only necessary things.
+- Usually you have to do three things: 
+*1. Enable something in configuration registers.*
+*2. Configure that thing.*
+*3. Read/Write registers of desired function.*
 - Each register has its name and address in which bits are stored.  To simplify coding their names can be used directly in code.
-- The first, lowest bit, is the rightmost. *(little endian architecture)*
+- The first, lowest significant bit, is the rightmost. *(little endian architecture)*
 
 ### What we need to blink the LED:
 1. **The Arduino UNO pin 13 corresponds to pin PB5 of ATMega328p.** It’s not in documentation but the pinout can be easily found. 
