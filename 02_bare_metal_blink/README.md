@@ -38,8 +38,10 @@ You need to add them to your system path. This page can help: http://fab.cba.mit
 To do that, open the terminal in VS Code, make sure you’re in the project main folder (where makefile is located). The makefile contains ready to use commands so you don’t have to write them each time. Understanding how this work is out of scope for my examples.
 *Included makefile is intended for a single file, to use many files check next example. You need to add them manually*
 
-- **Compiling:** type `make build`
+- **Compiling:** type `make create`
 - **Uploading:** set parameters in makefile, then type `make upload`
+
+*You can do both at once by typing* `make create upload`
 
 I'm using the **Pololu USB AVR programmer v2** to upload the code. If you want to use your Arduino UNO board again with Arduino IDE make sure to burn the bootloader in *Aruduino IDE > tools > Burn Bootloader*.
 
