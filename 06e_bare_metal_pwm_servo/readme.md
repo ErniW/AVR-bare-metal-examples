@@ -17,6 +17,7 @@ If you didn't know - servo position is controlled with a PWM wave of specific du
 - Set the prescaler to 64.
 - To set the frequency to 50Hz we need to set `ICR1` as a threshold value. Using the formula `(F_CPU / 64 / 50) - 1;
 ` ICR1 will be equal to 4999. You can check that in https://eleccelerator.com/avr-timer-calculator/
+- Servo should be connected to `OC1A` port (pin 9, PB1).
 
 *It's 4999 because we start from 0.*
 
