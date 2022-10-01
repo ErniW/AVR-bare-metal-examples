@@ -5,35 +5,33 @@
 #include <util/delay.h>
 #include <stdbool.h>
 
-uint8_t dutyCycle = 0;
-
-//oc1a oc1b oc2a
+uint8_t brightness = 0;
 
 // ISR(TIMER0_OVF_vect){
-// 	//OCR0A = dutyCycle;
-//     OCR0A = dutyCycle;
-//      OCR0B = dutyCycle;
+// 	OCR0A = brightness;
+//  OCR0A = brightness;
+//  OCR0B = brightness;
 // }
 
 // ISR(TIMER2_OVF_vect){
-// 	//OCR0A = dutyCycle;
-//     //OCR0A = dutyCycle;
-//     OCR2B = dutyCycle;
+// 	OCR0A = brightness;
+//  OCR0A = brightness;
+//  OCR2B = brightness;
 // }
 
 int main(){
 
     DDRD |= (1 << PD3) | (1 << PD5) | (1 << PD6);
 
-	TCCR0A = (1 << COM0A1) | (1 << COM0B1) | ( 1<< WGM00);// | ( 1<< WGM01);
+	TCCR0A = (1 << COM0A1) | (1 << COM0B1) | ( 1<< WGM00);
 	// TIMSK0 = ( 1 <<TOIE0);
 
-    TCCR2A = (1 << COM2B1) | ( 1<< WGM00);// | ( 1<< WGM01);
+    TCCR2A = (1 << COM2B1) | ( 1<< WGM20);
 	// TIMSK2 = ( 1 <<TOIE2);
 
 	sei();
-    TCCR0B = (1 << CS00);// | (1<< CS02);
-    TCCR2B = (1 << CS00);
+    TCCR0B = (1 << CS00);
+    TCCR2B = (1 << CS20);
 
     bool fade = false;
     uint8_t which_led = 0;
@@ -41,13 +39,13 @@ int main(){
     while(true){
 		_delay_ms(10);
 
-        if(!fade) dutyCycle++;
-        else dutyCycle--;
+        if(!fade) brightness++;
+        else brightness--;
 		
-		if(dutyCycle == 255 || dutyCycle == 0){
+		if(brightness == 255 || brightness == 0){
 			fade = !fade;
 
-            if(!fade && dutyCycle == 0){
+            if(!fade && brightness == 0){
                 which_led++;
                 which_led = which_led % 3;
             }
@@ -55,19 +53,19 @@ int main(){
 
         switch (which_led){
             case 0:
-                OCR0A = dutyCycle;
+                OCR0A = brightness;
                 OCR0B = 0;
                 OCR2B = 0;
                 break;
             case 1:
                 OCR0A = 0;
-                OCR0B = dutyCycle;
+                OCR0B = brightness;
                 OCR2B = 0;
                 break;
             case 2:
                 OCR0A = 0;
                 OCR0B = 0;
-                OCR2B = dutyCycle;
+                OCR2B = brightness;
                 break;
         }
 

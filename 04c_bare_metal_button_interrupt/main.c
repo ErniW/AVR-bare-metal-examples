@@ -11,14 +11,12 @@ ISR (INT0_vect){
 
 int main (void)
 {
-    //PD2, PD3 - 2,3 arduino pin
-
     PORTD |= (1 << PD2);
     DDRB |= (1 << PB5);
 
-    SREG |= 1 << 7;
-    EIMSK |= 1;
-    EICRA |= 1 << 1;
+    //SREG |= (1 << SREG_I);
+    EIMSK |= (1 << INT0);
+    EICRA |= (1 << ISC01);
 
     sei();
 

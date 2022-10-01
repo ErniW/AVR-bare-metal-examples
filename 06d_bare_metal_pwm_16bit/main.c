@@ -5,13 +5,13 @@
 #include <util/delay.h>
 #include <stdbool.h>
 
- uint16_t dutyCycle = 0;
+ uint16_t brightness = 0;
 //TIMER1_OVF_vect
 //TIMER1_COMPA_vect 
 ISR(TIMER1_OVF_vect ){
    
-    //    OCR1AH = dutyCycle >> 8;
-    //  OCR1AL = dutyCycle;
+    //    OCR1AH = brightness >> 8;
+    //  OCR1AL = brightness;
    // OCR1A = 10000;
 }
 
@@ -31,9 +31,9 @@ int main(){
     
 	// TCCR1A = (1 << COM1A0) | FAST_PWM_A;
     // TCCR1B =  PRESCALER_1 | FAST_PWM_B;
-	 TIMSK1 = ( 1 << TOIE1);
+	TIMSK1 = ( 1 << TOIE1);
     TCCR1A = (1<<COM1A1) + (1<<WGM11); 
-  TCCR1B = (1<<WGM13) + (1<<WGM12) + (1<<CS10);
+    TCCR1B = (1<<WGM13) + (1<<WGM12) + (1<<CS10);
    
      sei();
     ICR1 = 65535;
@@ -44,15 +44,15 @@ int main(){
     while(true){
 		_delay_ms(100);
 
-        if(!fade) dutyCycle++;
-        else dutyCycle--;
+        if(!fade) brightness++;
+        else brightness--;
 		
-		if(dutyCycle == 65535 || dutyCycle == 0){
+		if(brightness == 65535 || brightness == 0){
 			fade = !fade;
             PORTB ^= (1 << PB5);
 		}
 
-         OCR1A = dutyCycle;
+        OCR1A = brightness;
     };
 }
 

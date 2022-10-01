@@ -5,39 +5,35 @@
 #include <util/delay.h>
 #include <stdbool.h>
 
-uint8_t dutyCycle = 0;
-
-//oc1a oc1b oc2a
+volatile uint8_t brightness = 0;
 
 ISR(TIMER0_OVF_vect){
-	//OCR0A = dutyCycle;
-    OCR0A = dutyCycle;
+    OCR0A = brightness;
 }
 
 int main(){
 
-    DDRD |= (1 << PD3) | (1 << PD5) | (1 << PD6);
+    DDRD |= (1 << PD6);
 
-	TCCR0A = (1 << COM0A1) | ( 1<< WGM00);// | ( 1<< WGM01);
-   
+	TCCR0A = (1 << COM0A1) | ( 1<< WGM00);
+    TCCR0B = (1 << CS00);
+
 	TIMSK0 = ( 1 <<TOIE0);
 
 	sei();
-    TCCR0B = (1 << CS00);// | (1<< CS02);
-    
+
     bool fade = false;
 
     while(true){
 		_delay_ms(10);
 
-        if(!fade) dutyCycle++;
-        else dutyCycle--;
+        if(!fade) brightness++;
+        else brightness--;
 		
-		if(dutyCycle == 255 || dutyCycle == 0){
+		if(brightness == 255 || brightness == 0){
 			fade = !fade;
 		}
 
-        
     };
 
 }

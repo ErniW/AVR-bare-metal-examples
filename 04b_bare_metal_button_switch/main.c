@@ -15,9 +15,7 @@ int main (void)
 
         bool isPressed = PIND & (1 << PD2);
 
-        //isPressed == true && isPressed != previousState
-        
-        if(isPressed && !previousState){
+        if(isPressed == true && isPressed != previousState){
             PORTB ^= 1 << 5;
         }
 

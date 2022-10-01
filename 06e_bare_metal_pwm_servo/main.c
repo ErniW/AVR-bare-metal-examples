@@ -20,7 +20,7 @@ int main(){
     while(true){
         OCR1A = 125;
         _delay_ms(2000);
-         OCR1A = 370;
+         OCR1A = 375;
         _delay_ms(2000);
         OCR1A = 615;
         _delay_ms(2000);
