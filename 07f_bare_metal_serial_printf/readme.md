@@ -1,4 +1,4 @@
-##Using uart with streams.
+## Using uart with streams.
 These example uses `stdio` with `printf` and `fgets` for handling data buffers.
 
 *For now, it won't work correctly with bi-directional communication.*
