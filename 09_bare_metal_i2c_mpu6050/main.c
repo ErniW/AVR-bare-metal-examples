@@ -37,7 +37,6 @@ int main(){
 
     while(true){
 
-
         i2c_read_from_register(0x68 << 1, 0x3B, &buffer, 6);
 
         int16_t ax = (buffer[0]<<8 | buffer[1]);

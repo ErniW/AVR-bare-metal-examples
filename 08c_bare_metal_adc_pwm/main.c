@@ -19,13 +19,12 @@ void adcStartConversion(){
 void adcInit(){
     ADCSRA = (1 << ADEN) | (1 << ADIE) | ADC_PRESCALER_128;
     ADMUX = (1 << REFS0) | ADC_5;
-	DIDR0 = (1 << ADC5D);
+    DIDR0 = (1 << ADC5D);
 }
 
-ISR(ADC_vect)
-{
+ISR(ADC_vect){
     adc = ADC;
-	adcStartConversion();
+    adcStartConversion();
 }
 
 ISR(TIMER0_OVF_vect){
@@ -39,10 +38,10 @@ int main(){
 
     DDRD |= (1 << PD6);
 
-	TCCR0A = (1 << COM0A1) | ( 1<< WGM00);
+    TCCR0A = (1 << COM0A1) | ( 1<< WGM00);
     TCCR0B = (1 << CS00);
 
-	TIMSK0 = ( 1 <<TOIE0);
+    TIMSK0 = ( 1 <<TOIE0);
 
     sei();
 
