@@ -37,19 +37,19 @@ int main(){
     uint8_t which_led = 0;
 
     while(true){
-		_delay_ms(10);
+        _delay_ms(10);
 
         if(!fade) brightness++;
         else brightness--;
-		
-		if(brightness == 255 || brightness == 0){
-			fade = !fade;
+
+        if(brightness == 255 || brightness == 0){
+            fade = !fade;
 
             if(!fade && brightness == 0){
                 which_led++;
                 which_led = which_led % 3;
             }
-		}
+        }
 
         switch (which_led){
             case 0:

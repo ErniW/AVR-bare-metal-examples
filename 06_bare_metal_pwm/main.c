@@ -15,24 +15,24 @@ int main(){
 
     DDRD |= (1 << PD6);
 
-	TCCR0A = (1 << COM0A1) | ( 1<< WGM00);
+    TCCR0A = (1 << COM0A1) | ( 1<< WGM00);
     TCCR0B = (1 << CS00);
 
-	TIMSK0 = ( 1 <<TOIE0);
+    TIMSK0 = ( 1 <<TOIE0);
 
-	sei();
+    sei();
 
     bool fade = false;
 
     while(true){
-		_delay_ms(10);
+        _delay_ms(10);
 
         if(!fade) brightness++;
         else brightness--;
-		
-		if(brightness == 255 || brightness == 0){
-			fade = !fade;
-		}
+        
+        if(brightness == 255 || brightness == 0){
+            fade = !fade;
+        }
 
     };
 

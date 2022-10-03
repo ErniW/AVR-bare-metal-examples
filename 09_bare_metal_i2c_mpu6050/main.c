@@ -40,14 +40,14 @@ int main(){
         i2c_read_from_register(MPU6050, 0x3B, buffer, 6);
 
         int16_t ax = (buffer[0]<<8 | buffer[1]);
-		int16_t ay = (buffer[2]<<8 | buffer[3]);
-		int16_t az = (buffer[4]<<8 | buffer[5]);
+        int16_t ay = (buffer[2]<<8 | buffer[3]);
+        int16_t az = (buffer[4]<<8 | buffer[5]);
 
         i2c_read_from_register(MPU6050, 0x43, buffer, 6);
 
         int16_t gx = (buffer[0]<<8 | buffer[1]);
-		int16_t gy = (buffer[2]<<8 | buffer[3]);
-		int16_t gz = (buffer[4]<<8 | buffer[5]);
+        int16_t gy = (buffer[2]<<8 | buffer[3]);
+        int16_t gz = (buffer[4]<<8 | buffer[5]);
 
         sendValue(ax);
         sendValue(ay);
