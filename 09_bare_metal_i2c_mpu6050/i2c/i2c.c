@@ -5,10 +5,9 @@
 #include "i2c.h"
 
 void i2c_init(){
-	//set SCL to 400kHz
-	TWSR = 0x00;
-	TWBR = 0x0C;
-	//enable TWI
+	TWSR = 0;
+	TWBR = 12;
+
 	TWCR = (1<<TWEN);
 }
 
@@ -32,12 +31,13 @@ void i2c_read_from_register(char address, char reg, uint8_t* data, int len){
 	i2c_start();
 	i2c_write_byte(address | 1);
 	
-	for(int i = 0; i<len-1; i++){
+	for(int i = 0; i<len; i++){
 		data[i] = i2c_read(true);
 	}	
-    data[len-1] = i2c_read(false);
-   	// TWCR = (1<< TWINT) | (1<<TWEN);
-	// while ( !(TWCR & (1 <<TWINT)));
+
+   	TWCR = (1<< TWINT) | (1<<TWEN);
+    loop_until_bit_is_set(TWCR, TWINT);
+    
 	i2c_stop();
 } 
 
@@ -47,7 +47,7 @@ void i2c_start(void){
 }
 
 void i2c_stop(void){
-	TWCR = _BV(TWINT)| _BV(TWEN)| _BV(TWSTO);
+	TWCR = _BV(TWINT) | _BV(TWEN)| _BV(TWSTO);
 	loop_until_bit_is_clear(TWCR, TWSTO);
 }
 
@@ -59,6 +59,6 @@ void i2c_write_byte(uint8_t data){
 
 uint8_t i2c_read(bool ack){
 	TWCR = ((1<< TWINT) | (1<<TWEN) | (ack<<TWEA));
-	while ( !(TWCR & (1 <<TWINT)));
+	loop_until_bit_is_set(TWCR, TWINT);
 	return TWDR;
 }
