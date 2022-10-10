@@ -1,5 +1,12 @@
 # AVR bare metal examples
-A series of basic bare metal AVR development examples written in C. Sometimes I show some of them to my students when they ask me how microcontrollers are programmed without Arduino. Examples should be read in proposed order.
+A series of introductory bare metal AVR development examples written in C for someone who want to move outside of Arduino development. I show some of them to my students to briefly explain how microcontrollers are programmed without Arduino. 
+
+I've included guides for each example. They should be read in proposed order.
+
+### Things covered:
+- Understanding registers and configure them with bit-wise operations.
+- Configuring registers for AVR internals and peripherals.
+- Using the programmer and makefiles independently via command line interface (CLI) from any IDE.
 
 ## Prerequisities
 ### Hardware:
