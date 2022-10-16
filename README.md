@@ -8,7 +8,7 @@ I've included guides for each example. They should be read in proposed order.
 - Configuring registers for AVR internals and peripherals.
 - Using the programmer and makefiles independently via command line interface (CLI) from any IDE.
 
-## Prerequisities
+## Prerequisites
 ### Hardware:
 - Arduino UNO, examples are prepared for ATMega328p.
 - Programmer, for example Pololu AVR Programmer V2.
